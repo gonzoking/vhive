@@ -1,3 +1,4 @@
+const {getAnswer} = require('./services/QA-api');
 const express = require('express')
 const app = express()
 const port = 3000
