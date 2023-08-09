@@ -164,6 +164,13 @@ app.use((req, res, next) => {
   next();
 });
 
+// create an OPTIONS route with full CORS support
+app.options('*', (req, res) => {
+  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  res.send();
+});
+
 // create a GET route with a path variable called articleId
 // also add a query parameter called question
 app.get('/articles/:articleId/answer', async (req, res) => {
