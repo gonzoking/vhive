@@ -1,7 +1,7 @@
 const {getAnswer} = require('./services/QA-api');
 const express = require('express')
 const app = express()
-const port = 3000
+const port = 3001
 
 const articles = [];
 
@@ -41,7 +41,7 @@ app.post('/article/:articleId/question', (req, res) => {
   article.qanda.push({ question, answer })
 
   // send back the question and answer
-  res.send(`question: ${question}, answer: ${answer}`)
+  res.send(JSON.stringify({answer}));
 });
 
 app.get('/', (req, res) => {
