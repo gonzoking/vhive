@@ -171,7 +171,7 @@ app.get('/articles/:articleId/answer', async (req, res) => {
   const context = articles.find(({id}) => id === articleId)?.context;
   const answer = await getAnswer(context, question);
   // send back the articleId and question
-  res.send(`articleId: ${articleId}, qna: ${{question, answer}}`)
+  res.send({articleId, qna: {question, answer}});
 });
 
 // create a POST route called /article/:articleId/question which accepts a payload that has question and answer properties
