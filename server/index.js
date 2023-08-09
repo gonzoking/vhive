@@ -190,7 +190,7 @@ app.post('/articles/:articleId/question', (req, res) => {
   article.qanda.push({ question, answer })
 
   // send back the question and answer
-  res.send(JSON.stringify({answer}));
+  res.send(({answer, question}));
 });
 
 app.get('/', (req, res) => {
@@ -203,10 +203,11 @@ app.post('/articles', (req, res) => {
   const { name, context, id } = req.body
 
   // add the article to the articles array
-  articles.push({ name, context, id, qanda: [] });
+  const article = { name, context, id, qanda: [] };
+  articles.push(article);
 
   // send back the name and context
-  res.send(`name: ${name}, context: ${context}`)
+  res.send(JSON.stringify(article));
 });
 
 // create a GET route for all articles
