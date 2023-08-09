@@ -164,7 +164,7 @@ app.use((req, res, next) => {
 // also add a query parameter called question
 app.get('/articles/:articleId/answer', async (req, res) => {
   // get the articleId path variable
-  const articleId = req.params.articleId
+  const articleId = parseInt(req.params.articleId);
   // get the question query parameter
   const question = req.query.question
 
