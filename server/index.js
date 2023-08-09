@@ -10,7 +10,7 @@ const port = 3001
 const articles = [{
   id: "1",
   name: 'Tech article',
-  qanda: [],
+  qna: [],
   context: `Micromax Informatics once had a firm grip on the local mobile phone market in India, for a time passing stalwarts like Samsung, icons like Apple and many more to be the biggest handset maker of them all. But a mix of stronger (and cheaper) competition, coupled with the rapid pace of technology development and the ongoing market slowdown, have left it spinning.
 
   While some believe that it still has some life in it yet as a mobile brand, sources and filings point to something else: it’s eyeing up to step into mobility, specifically into the area of electric vehicles.
@@ -188,7 +188,7 @@ app.get('/articles/:articleId/answer', async (req, res) => {
 
 // create a POST route called /article/:articleId/question which accepts a payload that has question and answer properties
 // the articleId should be a path variable
-// the article should be found in the articles array and the question and answer should be added to the qanda array
+// the article should be found in the articles array and the question and answer should be added to the qna array
 app.post('/articles/:articleId/question', (req, res) => {
   // get the articleId path variable
   const articleId = req.params.articleId
@@ -199,7 +199,7 @@ app.post('/articles/:articleId/question', (req, res) => {
   const article = articles.find(article => article.id === articleId)
 
   // add the question and answer to the article
-  article.qanda.push({ question, answer })
+  article.qna.push({ question, answer })
 
   // send back the question and answer
   res.send(({answer, question}));
@@ -215,7 +215,7 @@ app.post('/articles', (req, res) => {
   const { name, context, id } = req.body
 
   // add the article to the articles array
-  const article = { name, context, id, qanda: [] };
+  const article = { name, context, id, qna: [] };
   articles.push(article);
 
   // send back the name and context
