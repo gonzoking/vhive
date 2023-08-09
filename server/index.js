@@ -8,8 +8,9 @@ app.use(bodyParser.json())
 const port = 3001
 
 const articles = [{
-  id: 1,
+  id: "1",
   name: 'Tech article',
+  qanda: [],
   context: `Micromax Informatics once had a firm grip on the local mobile phone market in India, for a time passing stalwarts like Samsung, icons like Apple and many more to be the biggest handset maker of them all. But a mix of stronger (and cheaper) competition, coupled with the rapid pace of technology development and the ongoing market slowdown, have left it spinning.
 
   While some believe that it still has some life in it yet as a mobile brand, sources and filings point to something else: it’s eyeing up to step into mobility, specifically into the area of electric vehicles.
@@ -175,7 +176,7 @@ app.options('*', (req, res) => {
 // also add a query parameter called question
 app.get('/articles/:articleId/answer', async (req, res) => {
   // get the articleId path variable
-  const articleId = parseInt(req.params.articleId);
+  const articleId = req.params.articleId
   // get the question query parameter
   const question = req.query.question
 
