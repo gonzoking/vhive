@@ -151,8 +151,13 @@ const articles = [{
   So as Micromax moves out of the frying pan that is India’s mobile phone market, that doesn’t keep it out of the fire. Those that might pose a threat include Ola Electric, Ather Energy, and traditional automobile players such as Bajaj and Hero Electric.`
 }];
 
-// set express to use JSON as body format
-app.use(express.json())
+const bodyParser = require('body-parser')
+ 
+// create application/json parser
+const jsonParser = bodyParser.json()
+ 
+// create application/x-www-form-urlencoded parser
+const urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 // add CORS headers for debugging to the express server
 app.use((req, res, next) => {
@@ -177,7 +182,7 @@ app.get('/articles/:articleId/answer', async (req, res) => {
 // create a POST route called /article/:articleId/question which accepts a payload that has question and answer properties
 // the articleId should be a path variable
 // the article should be found in the articles array and the question and answer should be added to the qanda array
-app.post('/articles/:articleId/question', (req, res) => {
+app.post('/articles/:articleId/question', urlencodedParser, (req, res) => {
   // get the articleId path variable
   const articleId = req.params.articleId
   // get the question and answer from the request body
@@ -198,7 +203,7 @@ app.get('/', (req, res) => {
 });
 
 // create a POST route for a single article. the payload should have the fields name and context
-app.post('/articles', (req, res) => {
+app.post('/articles', urlencodedParser, (req, res) => {
   // get the name and context fields from the request body
   const { name, context, id } = req.body
 
