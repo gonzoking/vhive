@@ -16,13 +16,16 @@ app.use((req, res, next) => {
 
 // create a GET route with a path variable called articleId
 // also add a query parameter called question
-app.get('/article/:articleId/answer', (req, res) => {
+app.get('/article/:articleId/answer', async (req, res) => {
   // get the articleId path variable
   const articleId = req.params.articleId
   // get the question query parameter
   const question = req.query.question
+
+  const context = articles.find(({id}) => id === articleId)?.context;
+  const answer = await getAnswer(context, question);
   // send back the articleId and question
-  res.send(`articleId: ${articleId}, question: ${question}`)
+  res.send(`articleId: ${articleId}, qna: ${{question, answer}}`)
 });
 
 // create a POST route called /article/:articleId/question which accepts a payload that has question and answer properties
